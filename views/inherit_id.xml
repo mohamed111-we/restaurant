@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--  Add A field In Form Account  -->
+    <record id="view_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_date']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!--  Add A field In Form Sales  -->
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='incoterm']" position="after">
+                <field name="test"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--  Edit The Search In Sales  -->
+    <record id="view_sales_order_filter_inherit" model="ir.ui.view">
+        <field name="name">sale.order.search.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="res_id"/>
+                <filter string="Restaurant Record" name="restaurant_record" domain="[('is_restaurant', '=', True)]"/>
+                <filter name="is_restaurant_group" string="Restaurant" domain="[]"
+                        context="{'group_by': 'is_restaurant'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--  Edit The Name Of Menu In Sales  -->
+    <record id="sale.menu_sale_quotations" model="ir.ui.menu">
+        <field name="name">My Quotations</field>
+    </record>
+
+    <!--  Edit The Action Of Menu In Sales  -->
+    <record id="sale.action_orders" model="ir.actions.act_window">
+        <field name="name">Appointment</field>
+    </record>
+
+</odoo>

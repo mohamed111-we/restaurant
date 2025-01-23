@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_restaurant_form" model="ir.ui.view">
+            <field name="name">Restaurant Form</field>
+            <field name="model">restaurant.restaurant</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_draft" string="Draft" type="object" class="oe_highlight" data-hotkey="v"/>
+                        <button name="action_open" string="Open" type="object" class="oe_highlight" data-hotkey="v"/>
+                        <button name="action_closed" string="Closed" type="object" class="oe_highlight"
+                                data-hotkey="v"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,closed"/>
+                    </header>
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="reference" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group string="Owner Details">
+                            <field name="owner_id"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                        <separator/>
+                        <group string="Restaurant Details">
+                            <group>
+                                <field name="name"/>
+                                <field name="location"/>
+                                <field name="cuisine_type"/>
+                            </group>
+                            <group>
+                                <field name="rating"/>
+                                <field name="zip_code"/>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Reservation">
+                                <field name="reservation_ids">
+                                    <tree editable="bottom">
+                                        <field name="customer_name"/>
+                                        <field name="number_of_people"/>
+                                        <field name="reservation_date"/>
+                                        <field name="status"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Tables">
+                                <field name="table_ids">
+                                    <tree editable="bottom">
+                                        <field name="table_number"/>
+                                        <field name="availability"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Customer Review">
+                                <field name="review_ids">
+                                    <tree editable="bottom">
+                                        <field name="customer_name"/>
+                                        <field name="rating"/>
+                                        <field name="comments"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Restaurant Employee">
+                                <field name="employee_ids">
+                                    <tree editable="bottom">
+                                        <field name="employee_name"/>
+                                        <field name="role"/>
+                                        <field name="working_hours"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" invisible="1"/>
+                        <field name="activity_ids" invisible="1"/>
+                        <field name="message_ids" invisible="1"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_restaurant_tree" model="ir.ui.view">
+            <field name="name">Restaurant Tree</field>
+            <field name="model">restaurant.restaurant</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="reference"/>
+                    <field name="owner_id"/>
+                    <field name="name"/>
+                    <field name="location"/>
+                    <field name="cuisine_type"/>
+                    <field name="zip_code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_restaurant_search" model="ir.ui.view">
+            <field name="name">Restaurant search</field>
+            <field name="model">restaurant.restaurant</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="reference"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_kanban_restaurant" model="ir.ui.view">
+            <field name="name">restaurant.restaurant.kanban</field>
+            <field name="model">restaurant.restaurant</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_card">
+                                <div class="o_kanban_details">
+                                    <strong>Restaurant Name :
+                                        <field name="name"/>
+                                    </strong>
+                                    <p>Owner:
+                                        <field name="owner_id"/>
+                                    </p>
+                                    <p>Location:
+                                        <field name="location"/>
+                                    </p>
+                                    <p>Cuisine Type:
+                                        <field name="cuisine_type"/>
+                                    </p>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_restaurant" model="ir.actions.act_window">
+            <field name="name">Restaurant</field>
+            <field name="res_model">restaurant.restaurant</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new food item for the restaurant menu.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_restaurant_root"
+                  name="Restaurant Management"
+                  sequence="10"/>
+
+        <menuitem id="menu_restaurant"
+                  name="Restaurant Details"
+                  parent="menu_restaurant_root"
+                  sequence="10"/>
+
+        <menuitem id="menu_restaurant_items"
+                  name="Restaurant"
+                  parent="menu_restaurant"
+                  action="action_restaurant"
+                  sequence="10"/>
+    </data>
+</odoo>

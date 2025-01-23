@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_restaurant_food,access.restaurant.food,model_restaurant_food,,1,1,1,1
+access_restaurant_restaurant,access.restaurant.restaurant,model_restaurant_restaurant,,1,1,1,1
+access_restaurant_reservation,access.restaurant.reservation,model_restaurant_reservation,,1,1,1,1
+access_restaurant_review,access.restaurant.review,model_restaurant_review,,1,1,1,1
+access_restaurant_table,access.restaurant.table,model_restaurant_table,,1,1,1,1
+access_restaurant_employee,access.restaurant.employee,model_restaurant_employee,,1,1,1,1
+access_restaurant_ingredient,access.restaurant.ingredient,model_restaurant_ingredient,,1,1,1,1
